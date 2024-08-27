@@ -1,0 +1,99 @@
+/* large screens */
+@media (min-width: 1600px)
+{
+    .container
+    {
+        max-width: 1500px;
+    }
+}
+
+
+@media (max-width: 1500px)
+{
+    .timer
+    {
+        right: 25px;
+        top: 4px;
+    }
+}
+
+
+/* Desktops/Laptops */
+@media (max-width: 1200px)
+{
+    .thinking_bro
+    {
+        display: none;
+    }
+    .quiz-question
+    {
+        font-size: 35px;
+    }
+    fieldset
+    {
+        width: 70%;
+    }
+}
+
+/* Laptops */
+@media (max-width: 1024px)
+{
+
+}
+
+/* Tablets */
+@media (max-width: 768px)
+{
+    .step-inner
+    {
+        padding: 60px;
+    }
+        .quiz-question
+    {
+        font-size: 35px;
+        width: 90%;
+    }
+    fieldset
+    {
+        width: 90%;
+    }
+
+}
+
+/* mobile */
+@media (max-width: 576px)
+{
+    .timer
+    {
+        display: none;
+    }
+    .step-inner
+    {
+        padding: 20px;
+    }
+    .quiz-question
+    {
+        width: 100%;
+        font-size: 25px;
+    }
+    fieldset
+    {
+        width: 100%;
+    }
+    .radio-field, .input-field .option
+    {
+        height: 70px;
+    }
+    .radio-field input, .input-field .option
+    {
+        border-radius: 0;
+    }
+    .radio-field label, .input-field .option
+    {
+        font-size: 20px;
+    }
+    .next-prev button
+    {
+        width: 100%;
+    }
+}

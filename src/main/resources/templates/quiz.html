@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="/assets/fonts/font.css">
+
+  <!-- fontawesome 5 -->
+  <link rel="stylesheet" href="/assets/css/all.min.css" />
+
+  <!-- bootstrap 5 -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+  <!-- Custom Css Files -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <link rel="stylesheet" href="/assets/css/animation.css">
+
+  <!-- result css -->
+  <link rel="stylesheet" href="/assets/css/result_style.css">
+
+</head>
+<body>
+
+<main class="overflow-hidden">
+  <div class="timer">
+    <div class="timer-inner">
+      <div class="timer-count">
+        <span id="countdown-timer">60</span>
+        sec
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="step-count" th:id="${questionDto.currentQuestionNumber}"><span>Question </span>
+      <span th:text="${questionDto.currentQuestionNumber+'/'+questionDto.totalQuestionNumber}"></span>
+    </div>
+
+    <header class="step-bar">
+      <div class="fill" th:style="${'width: '+questionDto.progressPercentage+';'}"></div>
+    </header>
+
+
+      <!-- step 1 -->
+      <section class="steps">
+        <form th:object="${participantAnswerDto}" id="submitAnswerForm" method="post" action="/submitAnswer" class="unlocked show-section">
+          <div class="step-inner">
+
+          <!-- question -->
+          <div class="quiz-question" th:text="${questionDto.questionBody}">
+
+          </div>
+
+          <!-- form -->
+          <fieldset th:id="${'step' + questionDto.currentQuestionNumber}">
+            <div class="input-field">
+              <label for="pm" class="option">The Product Manager</label>
+              <div class="radio-field bounce-left">
+                <div class="form-group position-relative" th:classappend="${questionDto.showResults?'show-result':''}">
+                <select th:field="${participantAnswerDto.productManagerAnswer}" class="form-select" id="pm" th:disabled="${questionDto.locked}"
+                        th:classappend="${participantAnswerDto.productManagerAnswer == questionDto.productManagerRightAnswer?'correct':'incorrect'}">
+                  <option value="" selected>-</option>
+                  <option value="A">Accountable</option>
+                  <option value="AR">Accountable & Responsible</option>
+                  <option value="R">Responsible</option>
+                  <option value="C">Consulted</option>
+                  <option value="I">Informed</option>
+                </select>
+                  <!-- Afișare iconiță în funcție de răspuns -->
+                  <i th:if="${questionDto.showResults}"
+                     th:switch="${participantAnswerDto.productManagerAnswer == questionDto.productManagerRightAnswer}">
+
+                    <!-- Dacă răspunsul este corect -->
+                    <i th:case="true"
+                       class="fa-solid fa-check green position-absolute top-50 end-0 translate-middle-y me-3"></i>
+
+                    <!-- Dacă răspunsul este greșit -->
+                    <i th:case="false"
+                       class="fa-solid red position-absolute top-50 end-0 translate-middle-y me-3"
+                       th:classappend="${questionDto.productManagerRightAnswer != 'AR' ? 'fa-' + questionDto.productManagerRightAnswer.toLowerCase() : 'fa-a'}">
+
+                      <!-- În cazul în care răspunsul corect este 'AR' -->
+                      <i th:if="${questionDto.productManagerRightAnswer == 'AR'}" class="fa-solid fa-r red"></i>
+                    </i>
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="input-field">
+              <label for="em" class="option">The Engineering Manager</label>
+              <div class="radio-field bounce-left delay-100">
+                <div class="form-group position-relative" th:classappend="${questionDto.showResults?'show-result':''}">
+                <select th:field="${participantAnswerDto.engineeringManagerAnswer}" class="form-select" id="em" th:disabled="${questionDto.locked}"
+                        th:classappend="${participantAnswerDto.engineeringManagerAnswer == questionDto.engineeringManagerRightAnswer?'correct':'incorrect'}">
+                  <option value="" selected>-</option>
+                  <option value="A">Accountable</option>
+                  <option value="AR">Accountable & Responsible</option>
+                  <option value="R">Responsible</option>
+                  <option value="C">Consulted</option>
+                  <option value="I">Informed</option>
+                </select>
+
+                  <!-- Afișare iconiță în funcție de răspuns -->
+                  <i th:if="${questionDto.showResults}"
+                     th:switch="${participantAnswerDto.engineeringManagerAnswer == questionDto.engineeringManagerRightAnswer}">
+
+                    <!-- Dacă răspunsul este corect -->
+                    <i th:case="true"
+                       class="fa-solid fa-check green position-absolute top-50 end-0 translate-middle-y me-3"></i>
+
+                    <!-- Dacă răspunsul este greșit -->
+                    <i th:case="false"
+                       class="fa-solid red position-absolute top-50 end-0 translate-middle-y me-3"
+                       th:classappend="${questionDto.engineeringManagerRightAnswer != 'AR' ? 'fa-' + questionDto.engineeringManagerRightAnswer.toLowerCase() : 'fa-a'}">
+
+                      <!-- În cazul în care răspunsul corect este 'AR' -->
+                      <i th:if="${questionDto.engineeringManagerRightAnswer == 'AR'}" class="fa-solid fa-r red"></i>
+                    </i>
+                  </i>
+
+
+
+                </div>
+              </div>
+            </div>
+            <div class="input-field">
+              <label class="option" for="designer">The Designer</label>
+
+              <div class="radio-field bounce-left delay-200">
+                <div class="form-group position-relative" th:classappend="${questionDto.showResults?'show-result':''}">
+                <select th:field="${participantAnswerDto.designerAnswer}" class="form-select" id="designer" th:disabled="${questionDto.locked}"
+                        th:classappend="${participantAnswerDto.designerAnswer == questionDto.designerRightAnswer?'correct':'incorrect'}">
+                  <option value="" selected>-</option>
+                  <option value="A">Accountable</option>
+                  <option value="AR">Accountable & Responsible</option>
+                  <option value="R">Responsible</option>
+                  <option value="C">Consulted</option>
+                  <option value="I">Informed</option>
+                </select>
+                  <!-- Afișare iconiță în funcție de răspuns -->
+                  <i th:if="${questionDto.showResults}"
+                     th:switch="${participantAnswerDto.designerAnswer == questionDto.designerRightAnswer}">
+
+                    <!-- Dacă răspunsul este corect -->
+                    <i th:case="true"
+                       class="fa-solid fa-check green position-absolute top-50 end-0 translate-middle-y me-3"></i>
+
+                    <!-- Dacă răspunsul este greșit -->
+                    <i th:case="false"
+                       class="fa-solid red position-absolute top-50 end-0 translate-middle-y me-3"
+                       th:classappend="${questionDto.designerRightAnswer != 'AR' ? 'fa-' + questionDto.designerRightAnswer.toLowerCase() : 'fa-a'}">
+
+                      <!-- În cazul în care răspunsul corect este 'AR' -->
+                      <i th:if="${questionDto.designerRightAnswer == 'AR'}" class="fa-solid fa-r red"></i>
+                    </i>
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="input-field">
+              <label class="option" for="dri">The Project DRI</label>
+              <div class="radio-field bounce-left delay-300">
+                <div class="form-group position-relative" th:classappend="${questionDto.showResults?'show-result':''}">
+                  <select th:field="${participantAnswerDto.driAnswer}" class="form-select" id="dri" th:disabled="${questionDto.locked}"
+                          th:classappend="${participantAnswerDto.driAnswer == questionDto.driRightAnswer?'correct':'incorrect'}">
+                    <option value="" selected>-</option>
+                    <option value="A">Accountable</option>
+                    <option value="AR">Accountable & Responsible</option>
+                    <option value="R">Responsible</option>
+                    <option value="C">Consulted</option>
+                    <option value="I">Informed</option>
+                  </select>
+<!--                  if the answer is right-->
+                  <i th:if="${participantAnswerDto.driAnswer == questionDto.driRightAnswer && questionDto.showResults}"
+                     class="fa-solid fa-check green position-absolute top-50 end-0 translate-middle-y me-3"></i>
+<!--                  if the answer is wrong, and the correct answer is not AR-->
+                  <i th:if="${participantAnswerDto.driAnswer != questionDto.driRightAnswer && questionDto.showResults && questionDto.driRightAnswer != 'AR'}"
+                     class="fa-solid red position-absolute top-50 end-0 translate-middle-y me-3"
+                     th:classappend="${'fa-'+questionDto.driRightAnswer.toLowerCase()}"></i>
+<!--                  if the answer is wrong, and the correct answer is AR-->
+                  <i th:if="${participantAnswerDto.driAnswer != questionDto.driRightAnswer && questionDto.showResults && questionDto.driRightAnswer == 'AR'}"
+                     class="fa-solid fa-r red position-absolute top-50 end-0 translate-middle-y me-3">
+                    <i class="fa-solid fa-a red"></i>
+                  </i>
+                </div>
+
+              </div>
+            </div>
+            <div class="input-field">
+              <label for="developer" class="option">The Developer</label>
+              <div class="radio-field bounce-left delay-300">
+
+                <div class="form-group position-relative" th:classappend="${questionDto.showResults?'show-result':''}">
+                  <select th:field="${participantAnswerDto.developerAnswer}" class="form-select" id="developer"
+                          th:disabled="${questionDto.locked}" th:classappend="${participantAnswerDto.developerAnswer == questionDto.developerRightAnswer?'correct':'incorrect'}">
+                    <option value="" selected>-</option>
+                    <option value="A">Accountable</option>
+                    <option value="AR">Accountable & Responsible</option>
+                    <option value="R">Responsible</option>
+                    <option value="C">Consulted</option>
+                    <option value="I">Informed</option>
+                  </select>
+                  <!-- Afișare iconiță în funcție de răspuns -->
+                  <i th:if="${questionDto.showResults}"
+                     th:switch="${participantAnswerDto.developerAnswer == questionDto.developerRightAnswer}">
+
+                    <!-- Dacă răspunsul este corect -->
+                    <i th:case="true"
+                       class="fa-solid fa-check green position-absolute top-50 end-0 translate-middle-y me-3"></i>
+
+                    <!-- Dacă răspunsul este greșit -->
+                    <i th:case="false"
+                       class="fa-solid red position-absolute top-50 end-0 translate-middle-y me-3"
+                       th:classappend="${questionDto.developerRightAnswer != 'AR' ? 'fa-' + questionDto.developerRightAnswer.toLowerCase() : 'fa-r'}">
+
+                      <!-- În cazul în care răspunsul corect este 'AR' -->
+                      <i th:if="${questionDto.developerRightAnswer == 'AR'}" class="fa-solid fa-a red"></i>
+                    </i>
+                  </i>
+
+                  </i>
+                </div>
+              </div>
+            </div>
+            <p th:if="${questionDto.locked && !questionDto.showResults}" class="success">You will see what the right answer after all participants submit their answers.</p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 0}" class="success">
+              Well, it looks like you went for creativity! 0 out of 5. Don’t worry, even the best have off days!
+            </p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 1}" class="success">
+              Just getting started! 1 out of 5. Remember, even Rome wasn’t built in a day!
+            </p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 2}" class="success">
+              Making progress! 2 out of 5. You’re on your way—just a bit more focus!
+            </p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 3}" class="success">
+              Not bad at all! 3 out of 5. You’re more than halfway there—keep it up!
+            </p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 4}" class="success">
+              Almost perfect! 4 out of 5. You’re just one point away from glory!
+            </p>
+
+            <p th:if="${questionDto.locked && questionDto.showResults && participantAnswerDto.pointsEarned == 5}" class="success">
+              Flawless victory! 5 out of 5. You nailed it—excellent work!
+            </p>
+            <div th:if="${scoreDto!= null && questionDto.currentQuestionNumber != questionDto.totalQuestionNumber}">
+              <p th:each="score, iterStat : ${scoreDto.participantScores}">
+        <span th:text="${iterStat.index == 0 ? '🎉 Leading the pack: ' + score.name + ' with ' + score.score + ' points! Keep up the great work!'
+                        : iterStat.index == 1 ? '🏅 Right on their heels: ' + score.name + ' with ' + score.score + ' points. The competition is heating up!'
+                        : iterStat.index == 2 ? '🥉 Holding onto third: ' + score.name + ' with ' + score.score + ' points. A strong finish is in sight!'
+                        : '✨ Still in the race: ' + score.name + ' with ' + score.score + ' points. Don’t give up now!'}">
+        </span>
+              </p>
+            </div>
+
+
+          </fieldset>
+          <img class="thinking_bro" src="assets/images/Manthinking-bro.png" alt="thinking-bro">
+        </div>
+
+        <!-- next previous -->
+          <div class="next-prev" th:unless="${questionDto.locked}">
+            <button class="next" type="submit" th:id="${'step' + questionDto.currentQuestionNumber + 'btn'}">lock in my answer<i class="fa-solid fa-unlock-keyhole"></i></button>
+          </div>
+        </form>
+        <div class="next-prev" th:if="${questionDto.locked && questionDto.showResults}">
+          <form action="/nextQuestion" method="post">
+
+            <button th:if="${questionDto.currentQuestionNumber != questionDto.totalQuestionNumber}" class="next nextQuestion" type="submit"
+                    th:id="${'step' + questionDto.currentQuestionNumber + 'btn'}">Go to next question<i class="fa-solid fa-hand-point-right"></i></button>
+            <button th:if="${questionDto.currentQuestionNumber == questionDto.totalQuestionNumber}" class="next nextQuestion" type="submit"
+                    th:id="${'step' + questionDto.currentQuestionNumber + 'btn'}">See final results<i class="fa-solid fa-medal"></i></button>
+
+          </form>
+
+        </div>
+        <div class="next-prev locked" th:if="${questionDto.locked && !questionDto.showResults}">
+          <button style="background-color: var(--field-color); color: var(--text-color);" class="next" type="button"
+                  th:id="${'step' + questionDto.currentQuestionNumber + 'btn'}">answer locked in<i class="fa-solid fa-lock"></i></button>
+        </div>
+
+
+
+      </section>
+
+  </div>
+
+  <!-- result -->
+  <div class="loadingresult">
+    <img src="assets/images/loading.gif" alt="loading">
+  </div>
+  <div class="result_page">
+    <div class="container">
+      <div class="result_inner">
+
+        <!-- header -->
+        <header class="resultheader">
+          Your Result is there
+          <div class="h-border"></div>
+        </header>
+
+        <div class="result_content">
+          <div class="result_msg">
+            <img src="assets/images/check.png" alt="check">
+            Wow! You are Brilliant!
+          </div>
+          <span>your overall score</span>
+          <div class="u_prcnt">
+            70%
+          </div>
+          <div class="prcnt_bar">
+
+            <div class="fill" ></div>
+          </div>
+          <div class="prcnt_bar_lvl">
+            Medium
+          </div>
+          <div class="lvl_overview">
+            <div class="lvl-single">
+              <div class="lvl-color low"></div>
+              <div class="lvl-name ">Low</div>
+              <div class="lvl-line"></div>
+            </div>
+            <div class="lvl-single">
+              <div class="lvl-color medium"></div>
+              <div class="lvl-name ">Medium</div>
+              <div class="lvl-line"></div>
+            </div>
+            <div class="lvl-single">
+              <div class="lvl-color high"></div>
+              <div class="lvl-name">High</div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="resultfooter"></footer>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="error"></div>
+
+<!-- bootstrap 5 -->
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- jQuery -->
+<script src="/assets/js/jquery-3.6.3.min.js"></script>
+
+<!-- result js -->
+<script src="/assets/js/result.js"></script>
+
+<!-- Custom js -->
+<script src="/assets/js/custom.js"></script>
+<script>
+  let intervalId;
+
+  function getPreviousResponse() {
+    const previousResponse = localStorage.getItem('previousResponse');
+    return previousResponse ? JSON.parse(previousResponse) : null;
+  }
+
+  function saveResponseToLocalStorage(response) {
+    localStorage.setItem('previousResponse', JSON.stringify(response));
+  }
+
+  function shouldReloadPage(currentResponse, previousResponse) {
+    const isDifferentResponse = JSON.stringify(currentResponse) !== JSON.stringify(previousResponse);
+    const noNextQuestionButton = $("button.nextQuestion").length === 0;
+    return isDifferentResponse && noNextQuestionButton;
+  }
+
+  function handleResponse(data) {
+    const previousResponse = getPreviousResponse();
+    const validationIsVisible = $(".show-result").length > 0;
+
+    // Salvează întotdeauna răspunsul curent în localStorage
+    saveResponseToLocalStorage(data);
+
+    if (shouldReloadPage(data, previousResponse)) {
+      if (previousResponse !== null) {
+        if (validationIsVisible && JSON.stringify(data) === "true") {
+          console.log("NO NEED FOR RELOAD, this participant finished last");
+        } else {
+          console.log('Response changed. Reloading the page.');
+          window.location.reload();
+        }
+      } else {
+        console.log("e prima data, nu fac reload");
+      }
+    } else {
+      console.log("nu fac reload");
+    }
+  }
+
+
+  function fetchStatus() {
+    const endpointUrl = 'http://localhost:8081/api/status';
+
+    fetch(endpointUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => handleResponse(data))
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+      clearInterval(intervalId);
+      localStorage.removeItem('previousResponse');
+    });
+  }
+
+  function startRequestInterval() {
+    intervalId = setInterval(fetchStatus, 5000);
+  }
+
+  // Start sending requests
+  startRequestInterval();
+
+</script>
+</body>
+</html>

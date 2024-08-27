@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Title</title>-->
+<!--  <link rel="stylesheet" href="/assets/css/result_style.css">-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"-->
+<!--          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"-->
+<!--          crossorigin="anonymous"></script>-->
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="/assets/fonts/font.css">
+
+  <!-- fontawesome 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+  <!-- bootstrap 5 -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+  <!-- Custom Css Files -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <link rel="stylesheet" href="/assets/css/animation.css">
+
+  <!-- result css -->
+  <link rel="stylesheet" href="/assets/css/result_style.css">
+  <style>
+    .next-prev button.next{
+      width: 150px;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      height: 55px;
+      text-transform: none;
+      width: auto;
+    }
+    .next-prev{
+      display: unset;
+      width: unset;
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="overflow-hidden">
+
+
+  <div class="container">
+
+
+
+
+
+
+    <div class="roles-container">
+      <h2>Understanding RACI Roles</h2>
+      <div class="role">
+        <h3>Responsible (R)</h3>
+        <p>The person or role responsible for performing the task or decision. They are the doers.</p>
+      </div>
+      <div class="role">
+        <h3>Accountable (A)</h3>
+        <p>The person or role ultimately accountable for the task or decision. They ensure that the task is completed.</p>
+      </div>
+      <div class="role">
+        <h3>Consulted (C)</h3>
+        <p>The person or role who provides input or advice before the task is completed or the decision is made.</p>
+      </div>
+      <div class="role">
+        <h3>Informed (I)</h3>
+        <p>The person or role who needs to be informed about the progress or outcome of the task or decision.</p>
+      </div>
+    </div>
+    <form action="/registerToQuiz" method="post">
+      <div class="next-prev">
+        <button class="next" type="submit" id="step1btn">Start the quiz<i class="fa-solid fa-ranking-star"></i></button>
+      </div>
+    </form>
+
+
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        text-align: center;
+      }
+
+      h2 {
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        color: #2c3e50;
+      }
+
+      p {
+        margin-bottom: 2rem;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .roles-container {
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+
+      .role {
+        margin-bottom: 1rem;
+      }
+
+      .role h3 {
+        font-size: 1.2rem;
+        color: #2980b9;
+        margin-bottom: 0.5rem;
+      }
+
+      .role p {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      .start-quiz-btn {
+        background-color: #2980b9;
+        color: #fff;
+        color: rgb(1, 1, 1);
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        background-color: var(--field-color);
+        font-weight: bold;
+
+
+      }
+
+      .start-quiz-btn:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+    </style>
+
+
+
+
+
+  </div>
+</main>
+
+<div id="error"></div>
+
+<!-- bootstrap 5 -->
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- jQuery -->
+<script src="/assets/js/jquery-3.6.3.min.js"></script>
+<script>
+  localStorage.setItem('previousResponse', null);
+</script>
+
+<!-- result js -->
+<script src="/assets/js/result.js"></script>
+
+<!-- Custom js -->
+<!--<script src="/assets/js/custom.js"></script>-->
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400;700;800&display=swap');
+
+:root
+{
+    --primary-color: rgb(0, 130, 31);
+    --secondary-color: rgb(222, 247, 229);
+    --text-color: rgb(0,0,0);
+    --field-color: rgb(204, 204, 204);
+}
+body
+{
+    font-family: "Jost";
+    width: 100%;
+}
+main
+{
+    width: 100%;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(../images/bg.png);
+    background-color: var(--secondary-color);
+    background-position: 50% 50%;
+    padding: 80px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+}
+.timer
+{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+.timer-inner
+{
+    width: 130px;
+    height: 130px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: grid;
+    column-gap: 50px;
+    align-items: center;
+    border: solid 10px var(--primary-color);
+}
+
+
+
+.timer .timer-count
+{
+    font-size: 20px;
+    color: var(--primary-color);
+    font-weight: normal;
+    text-align: center;
+    line-height: 1;
+}
+.timer .timer-count span
+{
+    display: block;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.step-count
+{
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 35px;
+}
+.step-bar
+{
+    width: 100%;
+    background-color: var(--field-color);
+    height: 17px;
+}
+  
+.step-bar .fill
+{
+    width: 20%;
+    height: 100%;
+    transition: 0.5s;
+    background-color: var(--primary-color);
+}
+.steps
+{
+    width: 100%;
+    height: 100%;
+}
+.step-inner
+{
+    background-color: rgb(255,255,255);
+    width: 100%;
+    min-height: 400px;
+    padding: 120px 0 50px 150px;
+    position: relative;
+}
+.quiz-question
+{
+    font-size: 26px;
+    color: var(--text-color);
+    font-weight: bold;
+    width: 70%;
+    position: relative;
+    z-index: 1;
+}
+fieldset
+{
+    width: 42%;
+    margin-top: 70px;
+    overflow: hidden;
+}
+.input-field 
+{
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+.radio-field
+{
+    position: relative;
+    width: 45%;
+    height: 55px;
+    display: grid;
+    align-content: center;
+    margin-left: auto;
+
+}
+.radio-field input
+{
+    -webkit-appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--field-color);
+    cursor: pointer;
+    transition: 0.5s;
+}
+.radio-field label
+{
+    pointer-events: none;
+    position: relative;
+    z-index: 10;
+    font-size: 27px;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-left: 50px;
+    transition: 0.5s;
+}
+select.form-select{
+    font-size: 14px;
+}
+.input-field .option
+{
+    height: 100%;
+    width: 45%;
+    background-color: var(--field-color);
+    border-radius: 6px;
+    transition: 0.5s;
+    height: 55px;
+    font-size: 15px;
+    color: rgb(1, 1, 1);
+    font-weight: bold;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+.input-field.active .option
+{
+    background-color: var(--primary-color);
+    color: rgb(255,255,255);
+}
+.input-field.active .radio-field input
+{
+    background-color: var(--primary-color);
+}
+.input-field.active .radio-field label
+{
+    color: rgb(255,255,255);
+}
+.thinking_bro
+{
+    position: absolute;
+    bottom: 0;
+    right: 70px;
+    width: auto;
+}
+
+.next-prev
+{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.next-prev button
+{
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 80px;
+    border: solid 1px transparent;
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.next-prev .next
+{
+    color: rgb(255, 255, 255);
+    background-color: var(--primary-color);
+}
+.next-prev button i
+{
+    position: relative;
+    top: 1;
+    margin: 0 10px;
+}
+
+
+
+
+#error div
+{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+ /* Ascunde săgeata implicită a selectului */
+ div.show-result > .form-select {
+     appearance: none; /* Ascunde stilul implicit al browserului */
+     -webkit-appearance: none; /* Compatibilitate pentru WebKit (Chrome, Safari) */
+     -moz-appearance: none; /* Compatibilitate pentru Firefox */
+     padding-right: 2.5rem; /* Adaugă spațiu pentru iconiță */
+     background: transparent; /* Asigură-te că fundalul este transparent */
+     background-image: none; /* Elimină orice imagine de fundal implicită */
+     border: 1px solid #ced4da; /* Stil pentru border */
+     /*color: red;*/
+ }
+div.show-result i.fa-xmark,
+div.show-result i.fa-r.red,
+div.show-result i.fa-a.red,
+div.show-result i.fa-c.red,
+div.show-result i.fa-i.red{
+    color: red;
+}
+div.show-result i.fa-check,
+div.show-result i.fa-r.green,
+div.show-result i.fa-a.green,
+div.show-result i.fa-i.green,
+div.show-result i.fa-c.green{
+    color: var(--bs-success-text);
+    color: var(--primary-color);
+}
+
+div.show-result > select.correct{
+
+    color: var(--primary-color);
+}
+div.show-result > select.incorrect{
+    color: red;
+    /*color: var(--bs-danger-text);*/
+}
+
+p.success {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 16px;
+}
